@@ -22,8 +22,9 @@ public class commandTest {
     }
 
     @Test
-    public void mainMenu() {
+    public void should_print_mainMenu_information() {
         command.mainMenu();
         assertThat(outputContent.toString(), containsString("Hello, welcome to library!"));
+        assertThat(outputContent.toString(), containsString("please select commond:\n+List Books+\n"));
     }
 }

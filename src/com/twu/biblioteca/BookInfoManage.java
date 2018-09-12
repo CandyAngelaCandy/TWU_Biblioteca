@@ -11,11 +11,12 @@ public class BookInfoManage {
         this.bookList = bookList;
     }
 
-    public void printAllBooks(){
+    public List<Book> printAllBooks(){
         System.out.println("All books in Biblioteca library");
         for (Book book : bookList) {
             System.out.println(book.getId()+" "+book.getName());
         }
+        return bookList;
     }
 
 

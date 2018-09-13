@@ -30,4 +30,6 @@ public class commandTest {
         command.initMainMenu();
         assertEquals(command.getMenuList().contains("List Book"),true);
     }
+
+
 }

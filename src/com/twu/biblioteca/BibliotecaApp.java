@@ -14,8 +14,11 @@ public class BibliotecaApp {
         System.out.println("\nplease select commond:");
 
         Scanner sc = new Scanner(System.in);
-        String userInput = sc.nextLine();
 
-        command.inputCommand(userInput);
+        while(sc.hasNext()) {
+            String commandInput = sc.nextLine();
+            command.handlerInputCommand(commandInput);
+        }
+
     }
 }

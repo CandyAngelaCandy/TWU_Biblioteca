@@ -15,6 +15,19 @@ public class Book {
         this.published = published;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Book) {
+            Book book = (Book) obj;
+            return this.name.equals(book.name)
+                    && this.id == book.id
+                    && this.author.equals(book.author)
+                    && this.published.equals(book.published);
+        }
+        return false;
+    }
+
+
     public String getAuthor() {
         return author;
     }

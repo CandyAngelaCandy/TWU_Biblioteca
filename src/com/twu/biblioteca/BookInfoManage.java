@@ -1,23 +1,52 @@
 package com.twu.biblioteca;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class BookInfoManage {
-    List<Book> bookList = new ArrayList<Book>();
+    private List<Book> bookList = new ArrayList<>();
 
-    public BookInfoManage(List<Book> bookList) {
+    public List<Book> getBookList() {
+        return bookList;
+    }
+
+    public void setBookList(List<Book> bookList) {
+        this.bookList = bookList;
+    }
+
+    public BookInfoManage() {
+        initBooksList();
+    }
+
+    public void initBooksList() {
+        List<Book> bookList = new ArrayList<>();
+        bookList.add(new Book(0,"Pride and Prejudice"," Jane Austen", Instant.parse("1995-10-23T10:12:35Z")));
+        bookList.add(new Book(1,"The Red and the Black"," Jane Austen",Instant.parse("1995-10-23T10:12:35Z")));
+        bookList.add(new Book(2,"Harry Potter and the Philosopher’s Stone"," Jane Austen",Instant.parse("1995-10-23T10:12:35Z")));
+        bookList.add(new Book(3,"The Lord of the Rings"," Jane Austen",Instant.parse("1995-10-23T10:12:35Z")));
+        bookList.add(new Book(4,"The Great Gatsby"," Jane Austen",Instant.parse("1995-10-23T10:12:35Z")));
+        bookList.add(new Book(5,"The Diary Of A Young Girl"," Jane Austen",Instant.parse("1995-10-23T10:12:35Z")));
         this.bookList = bookList;
     }
 
     public List<Book> printAllBooks(){
         System.out.println("All books in Biblioteca library");
-        for (Book book : bookList) {
+        for (Book book : this.bookList) {
             System.out.println(book.getId()+" "+book.getName());
         }
-        return bookList;
+        return this.bookList;
     }
 
+    public void checkoutBooks(int id) {
+        this.bookList = this.bookList.stream().filter((book) -> book.getId() != id).collect(Collectors.toList());
+    }
+
+    public String readFromConsole() {
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLine();
+    }
 
 }

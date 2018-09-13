@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class Command {
     private List<String> menuList = new ArrayList<>();
+    private BookInfoManage bookInfoManage = new BookInfoManage();
 
     public List<String> getMenuList() {
         return menuList;
@@ -21,14 +22,20 @@ public class Command {
     }
 
 
-    public void inputCommand(String userInput) {
+    public void handlerInputCommand(String userInput) {
 
         switch (userInput) {
             case "List Book":
-                System.out.println("list book");
+                bookInfoManage.printAllBooks();
                 break;
             case "Quit":
                 System.exit(0);
+                break;
+            case "Checkout Book":
+                System.out.println("please input book name which you want to borrow");
+                int inputBookId = readFromConsole();
+                bookInfoManage.checkoutBooks(inputBookId);
+                break;
             default:
                 System.out.println("Select a valid option");
         }
@@ -38,10 +45,16 @@ public class Command {
     public void initMainMenu() {
         menuList.add("List Book");
         menuList.add("Quit");
+        menuList.add("Checkout Book");
 
         for (String command : menuList) {
             System.out.println(command);
         }
+    }
+
+    public int readFromConsole() {
+        Scanner sc = new Scanner(System.in);
+        return sc.nextInt();
     }
 
 }

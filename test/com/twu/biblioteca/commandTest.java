@@ -11,20 +11,23 @@ import static org.junit.Assert.*;
 
 public class commandTest {
 
-    Command command ;
+    Command command = new Command();
     final ByteArrayOutputStream outputContent = new ByteArrayOutputStream();
 
     @Before
     public void setup() {
         System.setOut(new PrintStream(outputContent));
-
-        command = new Command();
     }
 
     @Test
-    public void should_print_mainMenu_information() {
-        command.mainMenu();
-        assertThat(outputContent.toString(), containsString("Hello, welcome to library!"));
-        assertThat(outputContent.toString(), containsString("please select commond:\n+List Books+\n"));
+    public void should_print_welcome_information() {
+        command.printWelcomeMessage();
+        assertThat(outputContent.toString(), containsString("Hello, welcome to Biblioteca library!"));
+    }
+
+    @Test
+    public void should_init_main_menu() {
+        command.initMainMenu();
+        assertEquals(command.getMenuList().contains("List Book"),true);
     }
 }

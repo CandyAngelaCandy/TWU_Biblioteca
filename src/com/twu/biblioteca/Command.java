@@ -1,11 +1,44 @@
 package com.twu.biblioteca;
 
-public class Command {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
-    public void mainMenu() {
-        String message = "Hello, welcome to library!";
-        String menuInformation = "please select commond:\n+List Books+\n";
-        System.out.println(message);
-        System.out.println(menuInformation);
+public class Command {
+    private List<String> menuList = new ArrayList<>();
+
+    public List<String> getMenuList() {
+        return menuList;
     }
+
+    public void setMenuList(List<String> menuList) {
+        this.menuList = menuList;
+    }
+
+
+    public void printWelcomeMessage() {
+        System.out.println("Hello, welcome to Biblioteca library!");
+    }
+
+
+    public void inputCommand(String userInput) {
+
+        switch (userInput) {
+            case "List Book":
+                System.out.println("list book");
+                break;
+            default:
+                System.out.println("Select a valid option");
+        }
+
+    }
+
+    public void initMainMenu() {
+        menuList.add("List Book");
+
+        for (String command : menuList) {
+            System.out.println(command);
+        }
+    }
+
 }

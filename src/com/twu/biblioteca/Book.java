@@ -7,12 +7,22 @@ public class Book {
     private int id;
     private String author;
     private Instant published;
+    private boolean borrow;
 
-    public Book(int id, String name, String author, Instant published) {
+    public boolean isBorrow() {
+        return borrow;
+    }
+
+    public void setBorrow(boolean borrow) {
+        this.borrow = borrow;
+    }
+
+    public Book(int id, String name, String author, Instant published, boolean borrow) {
         this.name = name;
         this.id = id;
         this.author = author;
         this.published = published;
+        this.borrow = borrow;
     }
 
     @Override

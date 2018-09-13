@@ -44,10 +44,18 @@ public class BookInfoManage {
 
     public void checkoutBooks(int id) {
 
-        this.bookList =  this.bookList.stream().map((book) ->{
-            if(book.getId() == id) book.setBorrow(true);
-            return book;
-        } ).collect(Collectors.toList());
+        boolean isExist = this.bookList.stream().anyMatch(book -> book.getId() == id);
+
+        if (isExist) {
+            this.bookList =  this.bookList.stream().map((book) ->{
+                if(book.getId() == id) book.setBorrow(true);
+                return book;
+            } ).collect(Collectors.toList());
+            System.out.println("Thank you! Enjoy the book");
+        }else{
+            System.out.println("That book is not available");
+        }
+
     }
 
     public String readFromConsole() {

@@ -27,6 +27,8 @@ public class Command {
             case "List Book":
                 System.out.println("list book");
                 break;
+            case "Quit":
+                System.exit(0);
             default:
                 System.out.println("Select a valid option");
         }
@@ -35,6 +37,7 @@ public class Command {
 
     public void initMainMenu() {
         menuList.add("List Book");
+        menuList.add("Quit");
 
         for (String command : menuList) {
             System.out.println(command);

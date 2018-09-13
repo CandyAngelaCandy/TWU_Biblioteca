@@ -33,8 +33,13 @@ public class Command {
                 break;
             case "Checkout Book":
                 System.out.println("please input book name which you want to borrow");
-                int inputBookId = readFromConsole();
-                bookInfoManage.checkoutBooks(inputBookId);
+                int checkoutBookId = readFromConsole();
+                bookInfoManage.checkoutBooks(checkoutBookId);
+                break;
+            case "return Book":
+                System.out.println("please input book name which you want to return");
+                int returnBookId = readFromConsole();
+                bookInfoManage.returnBook(returnBookId);
                 break;
             default:
                 System.out.println("Select a valid option");
@@ -44,8 +49,9 @@ public class Command {
 
     public void initMainMenu() {
         menuList.add("List Book");
-        menuList.add("Quit");
         menuList.add("Checkout Book");
+        menuList.add("return Book");
+        menuList.add("Quit");
 
         for (String command : menuList) {
             System.out.println(command);

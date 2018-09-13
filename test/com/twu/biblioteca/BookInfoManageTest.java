@@ -39,7 +39,7 @@ public class BookInfoManageTest {
     }
 
     @Test
-    public void should_update_book_when_check_out_book() {
+    public void should_update_book_when_check_out_book_success() {
          bookList =  this.bookList.stream().map((book) ->{
             if(book.getId() == 0) book.setBorrow(true);
             return book;
@@ -51,9 +51,33 @@ public class BookInfoManageTest {
     }
 
     @Test
-    public void shoud_print_not_available_when_book_not_exist() {
+    public void should_print_not_available_when_book_not_exist() {
         bookInfoManage.checkoutBooks(6);
         assertThat(outputContent.toString(), containsString("That book is not available"));
+    }
+
+    @Test
+    public void should_update_book_when_return_book_success() {
+        bookInfoManage.checkoutBooks(0);
+
+        bookList =  this.bookList.stream().map((book) ->{
+            if(book.getId() == 0) book.setBorrow(false);
+            return book;
+        } ).collect(Collectors.toList());
+
+        bookInfoManage.returnBook(0);
+        assertThat(bookInfoManage.getBookList(), is(bookList));
+        assertThat(outputContent.toString(), containsString("Thank you! Enjoy the book"));
+        assertThat(outputContent.toString(), containsString("Thank you for returning the book"));
+
+    }
+
+    @Test
+    public void should_print_invalid_message_when_book_not_exist() {
+        bookInfoManage.checkoutBooks(0);
+        bookInfoManage.returnBook(6);
+        assertThat(outputContent.toString(), containsString("That is not a valid book to return"));
+
     }
 
 }

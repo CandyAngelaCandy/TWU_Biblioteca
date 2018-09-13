@@ -58,6 +58,20 @@ public class BookInfoManage {
 
     }
 
+    public void returnBook(int id) {
+        boolean isExist = this.bookList.stream().anyMatch(book -> book.getId() == id);
+
+        if (isExist) {
+            this.bookList =  this.bookList.stream().map((book) ->{
+                if(book.getId() == id) book.setBorrow(false);
+                return book;
+            } ).collect(Collectors.toList());
+            System.out.println("Thank you for returning the book");
+        }else{
+            System.out.println("That is not a valid book to return");
+        }
+    }
+
     public String readFromConsole() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();

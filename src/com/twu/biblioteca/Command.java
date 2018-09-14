@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Command {
     private List<String> menuList = new ArrayList<>();
     private BookInfoManage bookInfoManage = new BookInfoManage();
+    private MovieInfoManage movieInfoManage = new MovieInfoManage();
 
     public List<String> getMenuList() {
         return menuList;
@@ -27,6 +28,9 @@ public class Command {
         switch (userInput) {
             case "List Book":
                 bookInfoManage.printAllBooks();
+                break;
+            case "List Movie":
+                movieInfoManage.printAllMovie();
                 break;
             case "Quit":
                 System.exit(0);
@@ -49,8 +53,11 @@ public class Command {
 
     public void initMainMenu() {
         menuList.add("List Book");
+        menuList.add("List Movie");
         menuList.add("Checkout Book");
+        menuList.add("Checkout Movie");
         menuList.add("return Book");
+        menuList.add("return Movie");
         menuList.add("Quit");
 
         for (String command : menuList) {

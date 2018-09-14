@@ -42,15 +42,17 @@ public class BookInfoManage {
         return this.bookList;
     }
 
-    public void checkoutBooks(int id) {
+    public void checkoutBooks(int id,UserInfoManage userInfoManage,String userId) {
 
         boolean isExist = this.bookList.stream().anyMatch(book -> book.getId() == id && book.getUserId().equals(""));
 
-        if (isExist) {
-            this.bookList = this.bookList.stream().map((book) -> {
-                if (book.getId() == id) book.setBorrow(true);
-                return book;
-            }).collect(Collectors.toList());
+        if (checkIsLogin(userInfoManage,userId) && isExist) {
+            this.bookList.forEach((book) -> {
+                if (book.getId() == id) {
+                    book.setBorrow(true);
+                    book.setUserId(userId);
+                }
+            });
             System.out.println("Thank you! Enjoy the book");
         } else {
             System.out.println("That book is not available");
@@ -58,14 +60,17 @@ public class BookInfoManage {
 
     }
 
+    public boolean checkIsLogin(UserInfoManage userInfoManage,String userId) {
+        return userInfoManage.getLoginUserlist().stream().anyMatch(id -> id.equals(userId));
+    }
+
     public void returnBook(int id) {
         boolean isExist = this.bookList.stream().anyMatch(book -> book.getId() == id);
 
         if (isExist) {
-            this.bookList = this.bookList.stream().map((book) -> {
+            this.bookList.forEach((book) -> {
                 if (book.getId() == id) book.setBorrow(false);
-                return book;
-            }).collect(Collectors.toList());
+            });
             System.out.println("Thank you for returning the book");
         } else {
             System.out.println("That is not a valid book to return");

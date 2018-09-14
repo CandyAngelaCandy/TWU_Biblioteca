@@ -51,22 +51,24 @@ public class Command {
                 break;
             case "Checkout Book":
                 System.out.println("please input book ID which you want to borrow:");
-                int checkoutBookId = readFromConsole();
-                bookInfoManage.checkoutBooks(checkoutBookId);
+                int checkoutBookId = readIntTypeFromConsole();
+                System.out.println("please input your id");
+                String userId = readStringTypeFromConsole();
+                bookInfoManage.checkoutBooks(checkoutBookId,userInfoManage,userId);
                 break;
             case "Checkout Movie":
                 System.out.println("please input movie ID which you want to borrow:");
-                int checkoutMovieId = readFromConsole();
+                int checkoutMovieId = readIntTypeFromConsole();
                 movieInfoManage.checkoutMovies(checkoutMovieId);
                 break;
             case "return Book":
                 System.out.println("please input book ID which you want to return:");
-                int returnBookId = readFromConsole();
+                int returnBookId = readIntTypeFromConsole();
                 bookInfoManage.returnBook(returnBookId);
                 break;
             case "return Movie":
                 System.out.println("please input movie ID which you want to return:");
-                int returnMovieId = readFromConsole();
+                int returnMovieId = readIntTypeFromConsole();
                 movieInfoManage.returnMovie(returnMovieId);
                 break;
             default:
@@ -92,9 +94,14 @@ public class Command {
         }
     }
 
-    public int readFromConsole() {
+    public int readIntTypeFromConsole() {
         Scanner sc = new Scanner(System.in);
         return sc.nextInt();
+    }
+
+    public String readStringTypeFromConsole() {
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLine();
     }
 
 }

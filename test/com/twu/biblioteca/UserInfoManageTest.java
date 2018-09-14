@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
 public class UserInfoManageTest {
     UserInfoManage userInfoManage = new UserInfoManage();
     List<User> userlist = new ArrayList<>();
+    List<String> loginUserlist = new ArrayList<>();
 
     @Before
     public void setup() {
@@ -23,10 +24,19 @@ public class UserInfoManageTest {
 
     @Test
     public void should_user_login_when_input_correct_id_password() {
-        userInfoManage.loginUser("411-2208","123");
-        List<String> loginUserlist = new ArrayList<>();
+        userInfoManage.loginUser("411-2208", "123");
         loginUserlist.add("411-2208");
-        assertThat(userInfoManage.getLoginUserlist(),is(loginUserlist));
+        assertThat(userInfoManage.getLoginUserlist(), is(loginUserlist));
+    }
+
+    @Test
+    public void should_user_login_out_when_input_correct_id_password() {
+        userInfoManage.loginUser("411-2209", "123");
+        loginUserlist.add("411-2209");
+        userInfoManage.loginoutUser("411-220");
+        loginUserlist.remove("411-220");
+        assertThat(userInfoManage.getLoginUserlist(), is(loginUserlist));
+
     }
 
 }

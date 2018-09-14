@@ -35,6 +35,11 @@ public class Command {
                 String password = sc.nextLine();
                 userInfoManage.loginUser(libraryNumber,password);
                 break;
+            case "User Logout":
+                System.out.println("please input your library number:");
+                Scanner scLogout = new Scanner(System.in);
+                String logoutId = scLogout.nextLine();
+                userInfoManage.loginoutUser(logoutId);
             case "List Book":
                 bookInfoManage.printAllBooks();
                 break;
@@ -72,6 +77,7 @@ public class Command {
 
     public void initMainMenu() {
         menuList.add("User Login");
+        menuList.add("User Logout");
         menuList.add("View User");
         menuList.add("List Book");
         menuList.add("List Movie");

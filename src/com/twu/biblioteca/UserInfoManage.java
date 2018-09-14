@@ -2,6 +2,7 @@ package com.twu.biblioteca;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserInfoManage {
     private List<User> userlist = new ArrayList<>();
@@ -41,8 +42,14 @@ public class UserInfoManage {
 
         if (isExist) {
             this.loginUserlist.add(id);
+            System.out.println("login success!");
         } else {
-            System.out.println("library number and password error. please retry.");
+            System.out.println("login failed. please retry.");
         }
+    }
+
+    public void loginoutUser(String id) {
+        this.loginUserlist = this.loginUserlist.stream().filter((userId) -> !userId.equals(id)).collect(Collectors.toList());
+        System.out.println("login out success!");
     }
 }

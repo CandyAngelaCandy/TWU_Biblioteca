@@ -54,4 +54,20 @@ public class MovieInfoManage {
         }
 
     }
+
+    public void returnMovie(int id) {
+        boolean isExist = this.movielist.stream().anyMatch(book -> book.getId() == id);
+
+        if (isExist) {
+            this.movielist =  this.movielist.stream().map((book) ->{
+                if(book.getId() == id) book.setBorrow(false);
+                return book;
+            } ).collect(Collectors.toList());
+            System.out.println("Thank you for returning the movie");
+        }else{
+            System.out.println("That is not a valid movie to return");
+        }
+    }
+
+
 }

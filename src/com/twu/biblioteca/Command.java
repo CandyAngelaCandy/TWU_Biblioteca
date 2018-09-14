@@ -50,6 +50,11 @@ public class Command {
                 int returnBookId = readFromConsole();
                 bookInfoManage.returnBook(returnBookId);
                 break;
+            case "return Movie":
+                System.out.println("please input movie ID which you want to return");
+                int returnMovieId = readFromConsole();
+                movieInfoManage.returnMovie(returnMovieId);
+                break;
             default:
                 System.out.println("Select a valid option");
         }

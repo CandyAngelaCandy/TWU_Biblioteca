@@ -64,7 +64,9 @@ public class Command {
             case "return Book":
                 System.out.println("please input book ID which you want to return:");
                 int returnBookId = readIntTypeFromConsole();
-                bookInfoManage.returnBook(returnBookId);
+                System.out.println("please input your id");
+                String returnUserId = readStringTypeFromConsole();
+                bookInfoManage.returnBook(returnBookId,userInfoManage,returnUserId);
                 break;
             case "return Movie":
                 System.out.println("please input movie ID which you want to return:");

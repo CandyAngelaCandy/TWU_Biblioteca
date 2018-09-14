@@ -42,11 +42,11 @@ public class BookInfoManage {
         return this.bookList;
     }
 
-    public void checkoutBooks(int id,UserInfoManage userInfoManage,String userId) {
+    public void checkoutBooks(int id, UserInfoManage userInfoManage, String userId) {
 
         boolean isExist = this.bookList.stream().anyMatch(book -> book.getId() == id && book.getUserId().equals(""));
 
-        if (checkIsLogin(userInfoManage,userId) && isExist) {
+        if (checkIsLogin(userInfoManage, userId) && isExist) {
             this.bookList.forEach((book) -> {
                 if (book.getId() == id) {
                     book.setBorrow(true);
@@ -54,25 +54,41 @@ public class BookInfoManage {
                 }
             });
             System.out.println("Thank you! Enjoy the book");
-        } else {
+        }
+
+        if (!checkIsLogin(userInfoManage, userId)) {
+            System.out.println("please login");
+        }
+
+        if (!isExist) {
             System.out.println("That book is not available");
         }
 
     }
 
-    public boolean checkIsLogin(UserInfoManage userInfoManage,String userId) {
+    public boolean checkIsLogin(UserInfoManage userInfoManage, String userId) {
         return userInfoManage.getLoginUserlist().stream().anyMatch(id -> id.equals(userId));
     }
 
-    public void returnBook(int id) {
+    public void returnBook(int id, UserInfoManage userInfoManage, String userId) {
+
         boolean isExist = this.bookList.stream().anyMatch(book -> book.getId() == id);
 
-        if (isExist) {
+        if (checkIsLogin(userInfoManage, userId) && isExist) {
             this.bookList.forEach((book) -> {
-                if (book.getId() == id) book.setBorrow(false);
+                if (book.getId() == id) {
+                    book.setBorrow(false);
+                    book.setUserId("");
+                }
             });
             System.out.println("Thank you for returning the book");
-        } else {
+        }
+
+        if (!checkIsLogin(userInfoManage, userId)) {
+            System.out.println("please login");
+        }
+
+        if (!isExist) {
             System.out.println("That is not a valid book to return");
         }
     }

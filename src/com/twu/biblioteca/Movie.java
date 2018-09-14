@@ -1,6 +1,12 @@
 package com.twu.biblioteca;
 
 public class Movie {
+    private int id;
+    private String name;
+    private int year;
+    private String director;
+    private double movieRating;
+
     public int getId() {
         return id;
     }
@@ -9,11 +15,6 @@ public class Movie {
         this.id = id;
     }
 
-    private int id;
-    private String name;
-    private int year;
-    private String director;
-    private double movieRating;
 
     public boolean isBorrow() {
         return borrow;

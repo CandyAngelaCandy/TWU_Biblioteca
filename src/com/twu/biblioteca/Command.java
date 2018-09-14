@@ -40,10 +40,12 @@ public class Command {
                 Scanner scLogout = new Scanner(System.in);
                 String logoutId = scLogout.nextLine();
                 userInfoManage.loginoutUser(logoutId);
+                break;
             case "display User":
                 System.out.println("please input your library number:");
                 String dispalyUserId = readStringTypeFromConsole();
                 userInfoManage.showUserInfo(dispalyUserId);
+                break;
             case "List Book":
                 bookInfoManage.printAllBooks();
                 break;
@@ -87,7 +89,6 @@ public class Command {
         menuList.add("User Login");
         menuList.add("User Logout");
         menuList.add("display User");
-        menuList.add("View User");
         menuList.add("List Book");
         menuList.add("List Movie");
         menuList.add("Checkout Book");

@@ -63,6 +63,8 @@ public class UserInfoManage {
                 System.out.println("Address: "+user.getAddress());
                 System.out.println("Phone Number: "+user.getPhoneNumber());
             });
+        }else{
+            System.out.println("please login");
         }
     }
 

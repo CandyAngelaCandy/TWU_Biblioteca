@@ -36,12 +36,17 @@ public class Command {
                 System.exit(0);
                 break;
             case "Checkout Book":
-                System.out.println("please input book name which you want to borrow");
+                System.out.println("please input book ID which you want to borrow");
                 int checkoutBookId = readFromConsole();
                 bookInfoManage.checkoutBooks(checkoutBookId);
                 break;
+            case "Checkout Movie":
+                System.out.println("please input movie ID which you want to borrow");
+                int checkoutMovieId = readFromConsole();
+                movieInfoManage.checkoutMovies(checkoutMovieId);
+                break;
             case "return Book":
-                System.out.println("please input book name which you want to return");
+                System.out.println("please input book ID which you want to return");
                 int returnBookId = readFromConsole();
                 bookInfoManage.returnBook(returnBookId);
                 break;

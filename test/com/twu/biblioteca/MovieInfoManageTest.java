@@ -7,7 +7,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
@@ -30,5 +32,23 @@ public class MovieInfoManageTest {
     @Test
     public void should_print_book_list() {
         assertThat(movieInfoManage.printAllMovie(), is(movielist));
+    }
+
+    @Test
+    public void should_update_movie_when_check_out_movie_success() {
+        movielist =  this.movielist.stream().map((book) ->{
+            if(book.getId() == 0) book.setBorrow(true);
+            return book;
+        } ).collect(Collectors.toList());
+
+        movieInfoManage.checkoutMovies(0);
+        assertThat(movieInfoManage.getMovielist(), is(movielist));
+        assertThat(outputContent.toString(), containsString("Thank you! Enjoy the movie"));
+    }
+
+    @Test
+    public void should_print_not_available_when_movie_not_exist() {
+        movieInfoManage.checkoutMovies(6);
+        assertThat(outputContent.toString(), containsString("That movie is not available"));
     }
 }

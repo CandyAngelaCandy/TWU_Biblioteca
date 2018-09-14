@@ -52,4 +52,21 @@ public class UserInfoManage {
         this.loginUserlist = this.loginUserlist.stream().filter((userId) -> !userId.equals(id)).collect(Collectors.toList());
         System.out.println("login out success!");
     }
+
+    public void showUserInfo(String dispalyUserId) {
+        boolean isLogin = checkIsLogin(dispalyUserId);
+        if (isLogin) {
+            this.userlist.stream().filter(user -> user.getId().equals(dispalyUserId)).forEach(user -> {
+                System.out.println("user detail information:");
+                System.out.println("name: "+user.getName());
+                System.out.println("Email: "+user.getEmail());
+                System.out.println("Address: "+user.getAddress());
+                System.out.println("Phone Number: "+user.getPhoneNumber());
+            });
+        }
+    }
+
+    public boolean checkIsLogin(String userId) {
+        return this.loginUserlist.stream().anyMatch(id -> id.equals(userId));
+    }
 }

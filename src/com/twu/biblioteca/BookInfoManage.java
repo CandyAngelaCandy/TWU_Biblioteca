@@ -45,8 +45,9 @@ public class BookInfoManage {
     public void checkoutBooks(int id, UserInfoManage userInfoManage, String userId) {
 
         boolean isExist = this.bookList.stream().anyMatch(book -> book.getId() == id && book.getUserId().equals(""));
+        boolean isLogin = userInfoManage.checkIsLogin(userId);
 
-        if (checkIsLogin(userInfoManage, userId) && isExist) {
+        if ( isLogin && isExist) {
             this.bookList.forEach((book) -> {
                 if (book.getId() == id) {
                     book.setBorrow(true);
@@ -56,7 +57,7 @@ public class BookInfoManage {
             System.out.println("Thank you! Enjoy the book");
         }
 
-        if (!checkIsLogin(userInfoManage, userId)) {
+        if (!isLogin) {
             System.out.println("please login");
         }
 
@@ -66,15 +67,13 @@ public class BookInfoManage {
 
     }
 
-    public boolean checkIsLogin(UserInfoManage userInfoManage, String userId) {
-        return userInfoManage.getLoginUserlist().stream().anyMatch(id -> id.equals(userId));
-    }
 
     public void returnBook(int id, UserInfoManage userInfoManage, String userId) {
 
         boolean isExist = this.bookList.stream().anyMatch(book -> book.getId() == id);
+        boolean isLogin = userInfoManage.checkIsLogin(userId);
 
-        if (checkIsLogin(userInfoManage, userId) && isExist) {
+        if (isLogin && isExist) {
             this.bookList.forEach((book) -> {
                 if (book.getId() == id) {
                     book.setBorrow(false);
@@ -84,7 +83,7 @@ public class BookInfoManage {
             System.out.println("Thank you for returning the book");
         }
 
-        if (!checkIsLogin(userInfoManage, userId)) {
+        if (!isLogin) {
             System.out.println("please login");
         }
 
